@@ -1,12 +1,12 @@
 ---
 description: Define authoritative checks, conventional commit boundaries, and the correct push, release, or deploy path.
-title: Validation and Delivery
+title: Validation and delivery
 order: 50
 ---
 
 ::page{layout="docs" width="normal" sidebar=true}
 
-# Validation and Delivery
+# Validation and delivery
 
 Every repository documents one authoritative validation sequence proportional to its risk. Run it before committing; automation should use the same commands when CI exists.
 

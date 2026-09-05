@@ -50,11 +50,10 @@ Never depend on an unpinned branch for reproducible CI.
 | Consumer | Provider | Boundary |
 |---|---|---|
 | MamboDot | MamboColour | `mbcolor` command through the MamboDot update wrapper |
-| MamboFolio | MamboSite | `mbsite` command and four npm packages at one compatible revision |
-| MamboFolio | MamboFont | `mbfont compile` through the site's theme/bootstrap wrapper |
+| MamboFolio | MamboSite | `mbsite`, four npm packages, and their bundled Project Mambo theme at one compatible revision |
 | MamboSite | MamboColour | palette generation through the MamboSite theme update wrapper |
 | MamboSite | MamboFont | WOFF2 compilation through the MamboSite theme update wrapper |
-| MamboWiki | MamboSite | `mbsite`, four npm packages, and their bundled MamboFont theme at one pinned revision |
+| MamboWiki | MamboSite | `mbsite`, four npm packages, and their bundled Project Mambo theme at one pinned revision |
 | MamboWiki | all project docs | synchronized, committed content snapshot |
 
 MamboDot intentionally does not consume MamboFont during daily setup. A locally installed font may still be referenced by desktop configuration, but rebuilding it is outside the dotfiles update path.

@@ -1,12 +1,12 @@
 ---
 description: Organize a Project Mambo repository, README, canonical docs, and Wiki project hub.
-title: Repository and Documentation
+title: Repository and documentation
 order: 10
 ---
 
 ::page{layout="docs" width="normal" sidebar=true}
 
-# Repository and Documentation
+# Repository and documentation
 
 Each repository should make its current purpose, supported surface, safe starting point, and maintenance state discoverable without requiring source-code archaeology.
 

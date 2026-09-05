@@ -30,7 +30,7 @@ Public commands should:
 - write requested result data to stdout or the documented output path;
 - write diagnostics to stderr;
 - return `0` for success, `2` for usage errors, and a non-zero runtime status for failures;
-- avoid colour when output is not an interactive terminal or when `NO_COLOR` is set;
+- remain understandable without colour; honouring `NO_COLOR` is recommended for commands that emit terminal colour;
 - replace managed output safely and never recursively delete an unverified path.
 
 Compatibility aliases are part of the public contract. Mark them clearly, test them, and remove them only through a documented breaking change.

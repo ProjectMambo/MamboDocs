@@ -15,13 +15,13 @@ The standard is descriptive and practical. It reuses patterns already proven in 
 
 | Goal | Document |
 |---|---|
-| Structure a repository and its documentation | [Repository and Documentation](docs/Repository%20and%20Documentation.md) |
+| Structure a repository and its documentation | [Repository and documentation](docs/Repository%20and%20Documentation.md) |
 | Design a command or library API | [Interfaces](docs/Interfaces.md) |
 | Design bootstrap, install, and release commands | [Lifecycle](docs/Lifecycle.md) |
 | Consume another Mambo repository | [Dependencies](docs/Dependencies.md) |
-| Validate, commit, push, or deploy work | [Validation and Delivery](docs/Validation%20and%20Delivery.md) |
+| Validate, commit, push, or deploy work | [Validation and delivery](docs/Validation%20and%20Delivery.md) |
 | Check project-type exceptions | [Exceptions](docs/Exceptions.md) |
-| Read the canonical Wiki documentation | [Project Mambo Wiki](https://projectmambo.org/mambodocs/) |
+| Read the canonical Wiki documentation | [projectmambo.org/mambodocs/](https://projectmambo.org/mambodocs/) |
 
 ## Core rules
 
@@ -43,6 +43,7 @@ Canonical Project Mambo documentation is authored under `notes/Docs/Projects/<Re
 
 ```text
 README.md                         GitHub entry point
+docs/README.md                    synchronized, non-routable README copy
 docs/index.md                     MamboWiki project hub
 docs/Repository and Documentation.md
 docs/Interfaces.md
@@ -60,9 +61,10 @@ MamboDocs deliberately contains no code generator, template engine, installer, o
 ```bash
 node ../notes/Scripts/sync_docs.js
 git diff --check
+git status --short
 ```
 
-After synchronization, MamboWiki validates every routed MamboDocs page with `mbsite check` and its production build.
+MamboDocs has no CI or release workflow. After synchronization, MamboWiki validates every routed MamboDocs page with `mbsite check` and its production build.
 
 ## Issues and feedback
 
