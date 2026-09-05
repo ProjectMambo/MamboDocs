@@ -56,4 +56,6 @@ Use SemVer tags for distributable packages, binaries, or assets. A release path 
 6. publish in an order that can be retried safely;
 7. report any partial remote state precisely.
 
+For GitHub releases, prefer an annotated tag followed by an editable draft. Give every release a concise description covering highlights, compatibility, validation, and known publication limits; review it before publishing and update it later with `gh release edit --notes-file` when the release remains mutable.
+
 Sites deploy commits instead of creating package releases. Documentation and personal configuration repositories need no release command unless they begin publishing versioned artifacts.
