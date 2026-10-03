@@ -115,10 +115,11 @@ Every routed Markdown page has frontmatter with:
 
 - `title`: unique, reader-facing page name;
 - `description`: one sentence that states the page outcome;
-- `order`: stable integer used for navigation ordering;
 - authoring metadata required by the notes vault.
 
-Use one H1 that matches the title in meaning. Give each page one primary subject. Use H2 and H3 in a logical hierarchy without skipping levels for visual size. The project `index.md` must state the boundary, link the source repository, expose child navigation, and distinguish current behavior from plans.
+Add a stable integer `order` when the page participates in generated navigation or a collection. A configured site entry at `docs/index.md` may omit it because the root has no sibling position; mounted project indexes keep it when the containing site orders those projects.
+
+Render exactly one H1 that matches the title in meaning. Author that H1 in Markdown unless a MamboSite page layout or hero deliberately generates it from the frontmatter title; never add a source heading that would duplicate the renderer-owned title. Give each page one primary subject. Use H2 and H3 in a logical hierarchy without skipping levels for visual size. The project `index.md` must state the boundary, link the source repository, expose child navigation, and distinguish current behavior from plans.
 
 MamboSite does not infer a useful landing page from a directory alone. Use explicit links or `::children{}` on every hub that owns child pages.
 
