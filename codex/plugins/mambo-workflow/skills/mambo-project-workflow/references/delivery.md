@@ -59,7 +59,7 @@ After every requested job is complete:
 1. run the full documented validation sequence;
 2. confirm canonical docs have been synchronized and the branch is clean;
 3. fetch the remote default branch without rewriting history;
-4. while still on a clean local default branch, fast-forward it to
+4. switch to the clean local default branch and fast-forward it to
    `origin/<default>` with `git merge --ff-only`; stop if it has diverged;
 5. use the repository's required pull-request path when branch protection or
    review policy requires it;
