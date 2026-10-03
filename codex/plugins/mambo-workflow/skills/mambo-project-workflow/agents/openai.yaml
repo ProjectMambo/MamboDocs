@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mambo Project Workflow"
+  short_description: "Run phased Mambo repository changes safely"
+  default_prompt: "Use $mambo-project-workflow to deliver this Project Mambo change."

@@ -2,73 +2,101 @@
 
 <p align="left">
   <img src="https://img.shields.io/badge/Markdown-000000?style=flat-square&logo=markdown&logoColor=white" alt="Markdown" />
+  <img src="https://img.shields.io/badge/Standard-Project_Mambo-7a5fff?style=flat-square" alt="Project Mambo standard" />
   <img src="https://img.shields.io/badge/Maintenance-Active-brightgreen?style=flat-square" alt="Maintenance status: active" />
   <img src="https://img.shields.io/github/last-commit/ProjectMambo/MamboDocs?style=flat-square&color=7a5fff" alt="Last commit" />
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/ProjectMambo/MamboDocs?style=flat-square&color=orange" alt="License" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/ProjectMambo/MamboDocs?style=flat-square&color=orange" alt="MIT License" /></a>
 </p>
 
-MamboDocs defines the shared documentation and interface conventions for Project Mambo repositories. It records the smallest common contract for READMEs, Wiki pages, commands, libraries, bootstrap scripts, cross-repository dependencies, validation, commits, releases, and site deployment.
+MamboDocs is the shared repository and documentation standard for Project Mambo. It defines how a Mambo project explains its purpose, starts from a clean clone, exposes commands and APIs, manages versions and dependencies, publishes documentation, and proves that a change is ready to deliver.
 
-The standard is descriptive and practical. It reuses patterns already proven in Project Mambo and names exceptions for repositories that are sites, personal workstation configuration, pre-release applications, or documentation only.
+## Motivation
+
+Project Mambo spans applications, libraries, terminal tools, websites, assets, personal configuration, and documentation. A contributor should not need to rediscover where the user guide lives, which command validates a change, whether generated files are authoritative, or how compatibility is communicated in every repository.
+
+MamboDocs makes those answers predictable while keeping project-specific machinery optional. Consistency applies to real boundaries; it does not require empty folders, speculative APIs, or the same language everywhere.
+
+## Status
+
+The standard is active and applies to new Project Mambo repositories. Existing repositories can adopt it incrementally when they are reviewed; this repository does not claim that every existing project already conforms.
+
+MamboDocs is documentation-only and is not independently versioned. Its synchronized repository snapshot follows the canonical notes source, and changes are tracked by Git history.
+
+## User stories
+
+- As a user, I can find the supported installation, first-run, update, troubleshooting, and removal paths without reading source code.
+- As a contributor, I can prepare a fresh clone, understand the architecture, run the authoritative checks, and submit one reviewable change.
+- As a maintainer, I can tell which files are authoritative, generated, public, versioned, and safe to replace.
+- As a Project Mambo tool, I can rely on a small set of repository and documentation conventions without guessing project internals.
 
 ## Start here
 
 | Goal | Document |
 |---|---|
-| Structure a repository and its documentation | [Repository and documentation](docs/Repository%20and%20Documentation.md) |
-| Design a command or library API | [Interfaces](docs/Interfaces.md) |
-| Design bootstrap, install, and release commands | [Lifecycle](docs/Lifecycle.md) |
-| Consume another Mambo repository | [Dependencies](docs/Dependencies.md) |
-| Validate, commit, push, or deploy work | [Validation and delivery](docs/Validation%20and%20Delivery.md) |
-| Check project-type exceptions | [Exceptions](docs/Exceptions.md) |
-| Read the canonical Wiki documentation | [projectmambo.org/mambodocs/](https://projectmambo.org/mambodocs/) |
+| Define motivation, users, scope, and outcomes | [Product definition](docs/Product%20Definition.md) |
+| Start a new Project Mambo repository | [Starting a repository](docs/Starting%20a%20Repository.md) |
+| Structure a repository, README, and website docs | [Repository and documentation](docs/Repository%20and%20Documentation.md) |
+| Write task-focused help for users | [User guide](docs/User%20Guide.md) |
+| Explain setup, architecture, and contribution work | [Developer guide](docs/Developer%20Guide.md) |
+| Format commands and build safe repository scripts | [Commands and scripts](docs/Commands%20and%20Scripts.md) |
+| Design a CLI, library, HTTP, file, or UI contract | [Interfaces](docs/Interfaces.md) |
+| Manage installation, versions, releases, and retirement | [Lifecycle and versioning](docs/Lifecycle.md) |
+| Consume another project reproducibly | [Dependencies](docs/Dependencies.md) |
+| Validate, commit, push, release, or deploy work | [Validation and delivery](docs/Validation%20and%20Delivery.md) |
+| Apply the workflow automatically in Codex | [Codex workflow](docs/Codex%20Workflow.md) |
+| Record a justified exception | [Exceptions](docs/Exceptions.md) |
+| Browse the published standard | [projectmambo.org/mambodocs/](https://projectmambo.org/mambodocs/) |
 
-## Core rules
+## Getting started
 
-- Keep one source of truth for documentation and generated artifacts.
-- Expose a small, documented command or package boundary; do not make consumers read provider internals.
-- Put calls to another Mambo project behind one consumer-owned update script.
-- Pin cross-repository inputs and commit the outputs needed for offline builds.
-- Keep bootstrap and installation idempotent, explicit, and safe around user-owned files.
-- Document the exact validation sequence and use conventional commits for one logical change at a time.
-- Push ordinary repositories; deploy website repositories through their single deploy command.
+For a new repository, copy only the applicable files from [`templates/`](templates/), complete every retained placeholder, and follow the [new-repository checklist](docs/Starting%20a%20Repository.md). Do not copy an empty section merely to appear complete.
 
-## Using this standard
+To inspect a repository against the objective baseline:
 
-Start with the rules that apply to the repository's real surface. A docs-only repository does not need a fake CLI; a personal dotfiles repository may document fixed hardware paths; a site deployment does not need a package release. When a repository intentionally differs, document the reason and the safe operating boundary.
-
-Canonical Project Mambo documentation is authored under `notes/Docs/Projects/<Repository>/` and synchronized to repository `README.md` and `docs/` snapshots. Do not hand-edit synchronized output.
-
-## Repository layout
-
-```text
-README.md                         GitHub entry point
-docs/README.md                    synchronized, non-routable README copy
-docs/index.md                     MamboWiki project hub
-docs/Repository and Documentation.md
-docs/Interfaces.md
-docs/Lifecycle.md
-docs/Dependencies.md
-docs/Validation and Delivery.md
-docs/Exceptions.md
-LICENSE
+```bash
+/path/to/MamboDocs/script/check-repository.sh /path/to/repository
 ```
 
-MamboDocs deliberately contains no code generator, template engine, installer, or release tool. The written contract is the shared layer; each project keeps the smallest implementation appropriate to its language and runtime.
+The check is advisory by default, which is appropriate during an implementation phase. Use `--strict` in CI or at a delivery gate:
+
+```bash
+/path/to/MamboDocs/script/check-repository.sh --strict /path/to/repository
+```
+
+## Documentation
+
+The standard is organized as a lifecycle: define the product, create the repository, write user and developer documentation, design public boundaries, manage versions and dependencies, then validate and deliver. The [published MamboDocs hub](https://projectmambo.org/mambodocs/) and the [local documentation hub](docs/index.md) contain the complete standard.
+
+Project documentation is authored once under `notes/Docs/Projects/<Repository>/` and synchronized into the repository. Repository `README.md` and `docs/` are generated snapshots; edit the canonical notes source first, update its `updated` field, then run the sync command documented in [Validation and delivery](docs/Validation%20and%20Delivery.md).
+
+## Project structure
+
+```text
+README.md                  synchronized repository entry point
+docs/                      synchronized, Wiki-routable standard
+codex/plugins/             reusable Codex workflow plugin source
+script/check-repository.sh read-only baseline checker
+templates/                 copyable project-documentation starters
+LICENSE                    MIT licence
+```
 
 ## Validation
 
+From `notes/`, synchronize the canonical source, then validate the exported repository:
+
 ```bash
-node ../notes/Scripts/sync_docs.js
+node Scripts/sync_docs.js --sync MamboDocs
+../MamboDocs/script/check-repository.sh --strict ../MamboDocs
 git diff --check
-git status --short
 ```
 
-MamboDocs has no CI or release workflow. After synchronization, MamboWiki validates every routed MamboDocs page with `mbsite check` and its production build.
+MamboWiki performs its own content and production-build checks after the synchronized standard is mounted there.
 
-## Issues and feedback
+## Development
 
-Standards changes should be grounded in a real Project Mambo repository. Propose a new mandatory rule only when it removes an observed inconsistency or protects a real public boundary.
+Standards changes should solve an observed documentation, safety, compatibility, or contributor problem. Update the canonical page and its `updated` metadata, synchronize the complete snapshot, run the checker, and review both source and generated differences. Keep unrelated standards changes in separate Conventional Commits.
+
+When a rule does not apply, use the documented exception process instead of inventing placeholder code or silently ignoring the standard.
 
 ## License
 

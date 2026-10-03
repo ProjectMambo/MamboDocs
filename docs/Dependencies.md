@@ -1,71 +1,113 @@
 ---
-description: Consume another Project Mambo repository through a thin, pinned, consumer-owned boundary.
+description: Select, pin, update, audit, and remove dependencies through explicit provider and consumer boundaries.
 title: Dependencies
-order: 40
+order: 90
 ---
 
 ::page{layout="docs" width="normal" sidebar=true}
 
 # Dependencies
 
-Project Mambo repositories should share capabilities through documented commands or packages, not by reaching into another repository's internal paths.
+Dependencies trade owned code for an external compatibility, security, licence, and maintenance commitment. Add one only when it is smaller and safer than the capability Project Mambo would otherwise maintain.
+
+## Selection
+
+Before adding a dependency, record the real capability it provides and check:
+
+- the standard library, platform, or existing dependency does not already cover it;
+- its licence is compatible with the repository and intended distribution;
+- its maintenance, release, security, and ownership signals are acceptable;
+- supported platforms and runtime versions match the project;
+- its transitive tree, binary size, build time, and network requirements are proportionate;
+- its public types do not need to leak across the project's own boundary;
+- removal or replacement remains possible at a clear adapter or package boundary.
+
+Do not add a dependency for one trivial helper, speculative future use, or a development convenience that complicates every consumer.
+
+## Classify dependencies
+
+Keep runtime, build, development, optional, peer, and platform dependencies in the ecosystem's appropriate categories. A dependency needed only to regenerate a committed artifact is a maintainer-time dependency, not automatically a requirement for every user or production build.
+
+Document external system dependencies—databases, services, fonts, operating-system packages, commands, sibling repositories—with the same care as package-manager entries.
+
+## Pinning and locks
+
+Applications, commands, websites, and reproducible tools commit lockfiles and use locked modes in CI. Libraries normally publish supported version ranges while testing against their resolved lockfile according to ecosystem convention.
+
+Prefer a released provider version. An exact Git commit is acceptable during coordinated sibling development when:
+
+- the consumer records the commit in its manifest or CI;
+- the provider commit exists remotely before the consumer is delivered;
+- lockfiles are committed;
+- the temporary relationship and update path are documented;
+- provider and consumer checks both run.
+
+Never depend on an unpinned moving branch for a reproducible build. Avoid local `file:` or sibling paths in delivered manifests unless the product is intentionally a workspace and CI proves the complete workspace.
 
 ## Provider contract
 
 A provider owns:
 
-- the public command or package grammar;
+- the public command, package, service, file, or asset grammar;
 - input validation and domain rules;
-- deterministic output for pinned inputs;
-- compatibility notes and release/version policy;
-- focused tests for the public boundary.
+- deterministic output for pinned inputs where applicable;
+- compatibility, deprecation, and release policy;
+- focused tests and documentation for the public boundary.
 
-The provider does not own each consumer's file layout or semantic mapping.
+The provider does not own each consumer's layout, naming, release timing, or semantic mapping.
 
-## Consumer wrapper
+## Consumer boundary
 
-Each consumer puts calls to a provider behind one repo-local update script. That wrapper owns:
+A consumer depends only on the provider's documented public surface. Put project-specific mapping and generated-file placement behind one consumer-owned adapter or update script. That boundary owns:
 
-- the provider version, exact commit, palette, format, or other selected input;
-- mapping provider names into the consumer's model;
-- destination paths and stable consumer-facing filenames;
-- validation that all required provider values exist;
-- a check showing whether regenerated output differs.
+- the selected provider version, exact commit, format, and options;
+- mapping provider concepts into the consumer's model;
+- destination paths and stable consumer-facing names;
+- validation that required provider values exist;
+- a check showing whether regenerated output differs;
+- consumer-specific recovery when the provider fails.
 
-Application builds consume committed results and remain self-contained. Provider checkouts and toolchains are maintainer-time update dependencies unless the build genuinely requires live generation.
+Do not import another repository's internal modules or reach into its unversioned paths. If two projects need the same real library boundary, make that boundary public in the provider rather than copying internals.
 
-## Pinning
+## Generated and vendored inputs
 
-Prefer a released provider version. During sibling-repository development, an exact Git commit is acceptable when:
+Commit generated or vendored input when ordinary builds must remain self-contained, offline-capable, or independent from a maintainer toolchain. Document:
 
-- the consumer records it in CI or an update manifest;
-- package lockfiles are committed;
-- docs call out the transitional sibling layout;
-- provider and consumer checks run before delivery.
+- authoritative source and licence;
+- exact provider version or checksum;
+- update command and required tools;
+- deterministic comparison method;
+- which generated files reviewers should inspect;
+- whether manual edits are forbidden.
 
-Never depend on an unpinned branch for reproducible CI.
+Do not commit caches or build output merely because they are expensive to recreate. Generated files move in the same logical change as their source or provider pin.
 
-## Current dependency map
+## Updates
 
-| Consumer | Provider | Boundary |
-|---|---|---|
-| MamboDot | MamboColour | `mbcolor` command through the MamboDot update wrapper |
-| MamboFolio | MamboSite | `mbsite`, four npm packages, and their bundled Project Mambo theme at one compatible revision |
-| MamboSite | MamboColour | palette generation through the MamboSite theme update wrapper |
-| MamboSite | MamboFont | WOFF2 compilation through the MamboSite theme update wrapper |
-| MamboWiki | MamboSite | `mbsite`, four npm packages, and their bundled Project Mambo theme at one pinned revision |
-| MamboWiki | all project docs | synchronized, committed content snapshot |
+Dependency updates are reviewable changes, not background noise. For each update:
 
-MamboDot intentionally does not consume MamboFont during daily setup. A locally installed font may still be referenced by desktop configuration, but rebuilding it is outside the dotfiles update path.
+1. read the direct dependency's release and migration notes;
+2. inspect meaningful lockfile and transitive changes;
+3. verify licence, platform, runtime, and security implications;
+4. regenerate declared outputs;
+5. run contract, integration, and production-build checks;
+6. update compatibility documentation when behavior changed;
+7. deliver providers before consumers.
 
-## Update order
+Group updates only when they form one compatibility unit. Keep unrelated major upgrades separate so failures and rollback remain understandable.
 
-1. Change and validate the provider.
-2. Select a release or exact provider commit.
-3. Run the consumer-owned wrapper and review generated differences.
-4. Update manifests, locks, and CI pins together where applicable.
-5. Run provider and consumer checks.
-6. Update canonical docs and synchronize the owner plus MamboWiki.
-7. Commit per repository and publish providers before consumers.
+## Security and provenance
 
-No generic cross-repository adapter framework is needed. One explicit wrapper per real dependency is the stable boundary.
+Use official registries or verified upstream release sources. Preserve package-manager integrity data and checksums for directly distributed artifacts. CI installation must not execute unreviewed scripts with broader credentials than required.
+
+Run the ecosystem's available advisory audit at an appropriate cadence, but review findings for reachability and actual project impact. Record accepted risk with scope, mitigation, owner, and review condition. Never suppress a finding solely to make a badge pass.
+
+## Licences and attribution
+
+Track direct and bundled dependency licences. Include notices and source offers required by the licences of distributed binaries, fonts, themes, icons, or vendored code. A repository licence does not replace third-party attribution.
+
+## Removal
+
+Remove unused dependencies, feature flags, update scripts, lockfile entries, generated outputs, and documentation together. Run the complete build after removal; an import search alone does not prove a build-time or dynamically loaded dependency is unused.
+
+No generic cross-repository adapter framework is required. One explicit boundary per real dependency is easier to audit and replace.

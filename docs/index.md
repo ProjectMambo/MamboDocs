@@ -1,5 +1,5 @@
 ---
-description: Shared repository, documentation, interface, dependency, and delivery standards for Project Mambo.
+description: Complete repository, product, documentation, interface, lifecycle, dependency, and delivery standards for Project Mambo.
 title: MamboDocs
 order: 20
 ---
@@ -8,23 +8,33 @@ order: 20
 
 # MamboDocs
 
-MamboDocs is the operating standard for Project Mambo repositories. It keeps documentation consistent while allowing sites, libraries, command-line tools, applications, assets, and personal configuration to retain the structure they actually need.
+MamboDocs is the operating standard for Project Mambo repositories. It gives users, contributors, maintainers, and tools predictable project boundaries while allowing applications, libraries, commands, websites, assets, documentation, and personal configuration to keep only the structure they need.
 
-::button{label="Source code" href="https://github.com/ProjectMambo/MamboDocs" variant="secondary" external=true}
+::button{label="Source repository" href="https://github.com/ProjectMambo/MamboDocs" variant="secondary" external=true}
 
-## Standard
+## Use the standard
 
-- Author documentation once and synchronize complete repository snapshots.
-- Treat commands and package exports as public contracts.
-- Wrap cross-project calls in one consumer-owned update script.
-- Pin provider inputs and keep ordinary builds self-contained.
-- Make lifecycle scripts safe, idempotent, and clear about mutations.
-- Record checks, conventional commit boundaries, and the correct push or deploy path.
+For a new project, begin with the product definition and new-repository checklist. For an existing project, use the page matching the boundary being changed and record any applicable exception. The repository checker validates the objective baseline; human review validates truth, safety, and usability.
+
+## Core contract
+
+- Define motivation, users, current scope, non-goals, and maturity before architecture.
+- Author documentation once in the notes vault and synchronize complete repository snapshots.
+- Make the README, user path, developer setup, public interfaces, lifecycle, and validation route discoverable.
+- Keep commands and scripts copyable, deterministic where practical, and safe around user-owned state.
+- Treat commands, package exports, routes, configuration, files, and stored data as versioned consumer contracts.
+- Pin provider inputs, wrap project-specific dependency mapping in the consumer, and keep ordinary builds self-contained.
+- Validate each coherent phase, use Conventional Commits, and separate local changes from remote publication.
+- Apply requirements proportionally and record bounded exceptions instead of inventing ceremony.
 
 ## Documentation
 
 ::children{view="list" sort="order" direction="asc" show=["title","description"]}
 
+## Source of truth
+
+Canonical pages live under `notes/Docs/Projects/MamboDocs/`. The MamboDocs repository and this published section are synchronized outputs. Standards changes update canonical page metadata, run the sync, and validate the complete result.
+
 ## Scope
 
-MamboDocs is documentation only. It does not introduce a shared framework or force code into a repository that does not need it.
+MamboDocs defines the shared baseline and provides copyable templates plus a small read-only checker. It does not generate application architecture, force a common language, or claim that every existing Project Mambo repository already conforms.

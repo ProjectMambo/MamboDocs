@@ -1,0 +1,23 @@
+{
+  "name": "mambo-workflow",
+  "version": "0.1.0",
+  "description": "Project Mambo delivery workflow and documentation guardrails for Codex.",
+  "author": {
+    "name": "Project Mambo",
+    "url": "https://github.com/ProjectMambo"
+  },
+  "homepage": "https://projectmambo.org/mambodocs/",
+  "repository": "https://github.com/ProjectMambo/MamboDocs",
+  "license": "MIT",
+  "keywords": ["project-mambo", "git", "documentation", "workflow"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Mambo Workflow",
+    "shortDescription": "Deliver Project Mambo changes in reviewable phases.",
+    "longDescription": "Plans Project Mambo work by phase, maintains canonical documentation, and carries verified changes through branch, commit, push, and merge.",
+    "developerName": "Project Mambo",
+    "category": "Productivity",
+    "capabilities": ["Write"],
+    "defaultPrompt": "Implement this Project Mambo change using the standard phased workflow."
+  }
+}
