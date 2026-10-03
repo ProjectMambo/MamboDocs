@@ -27,9 +27,17 @@ For a new project, begin with the product definition and new-repository checklis
 - Validate each coherent phase, use Conventional Commits, and separate local changes from remote publication.
 - Apply requirements proportionally and record bounded exceptions instead of inventing ceremony.
 
-## Documentation
+## Define and document a project
 
-::children{view="list" sort="order" direction="asc" show=["title","description"]}
+::children{include=["[[Product Definition]]","[[Starting a Repository]]","[[Repository and Documentation]]","[[User Guide]]","[[Developer Guide]]"] view="list" sort="order" direction="asc" show=["title","description"]}
+
+## Design and maintain contracts
+
+::children{include=["[[Commands and Scripts]]","[[Interfaces]]","[[Lifecycle]]","[[Dependencies]]"] view="list" sort="order" direction="asc" show=["title","description"]}
+
+## Validate and govern delivery
+
+::children{include=["[[Validation and Delivery]]","[[Codex Workflow]]","[[Exceptions]]"] view="list" sort="order" direction="asc" show=["title","description"]}
 
 ## Source of truth
 

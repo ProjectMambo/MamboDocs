@@ -117,11 +117,25 @@ Every routed Markdown page has frontmatter with:
 - `description`: one sentence that states the page outcome;
 - authoring metadata required by the notes vault.
 
+Use the repository name as the project hub's title. Give subpages concise sentence-case titles and omit a redundant project-name prefix when the hub already supplies that context: prefer `Architecture` to `MamboWiki architecture`. Preserve established capitalization for proper nouns and acronyms such as `MamboSite`, `TypeScript`, `API`, and `TUI`. An authored H1 must use the same wording as the frontmatter title; a renderer-owned H1 derives that wording from the title.
+
 Add a stable integer `order` when the page participates in generated navigation or a collection. A configured site entry at `docs/index.md` may omit it because the root has no sibling position; mounted project indexes keep it when the containing site orders those projects.
 
-Render exactly one H1 that matches the title in meaning. Author that H1 in Markdown unless a MamboSite page layout or hero deliberately generates it from the frontmatter title; never add a source heading that would duplicate the renderer-owned title. Give each page one primary subject. Use H2 and H3 in a logical hierarchy without skipping levels for visual size. The project `index.md` must state the boundary, link the source repository, expose child navigation, and distinguish current behavior from plans.
+Render exactly one H1. Author that H1 in Markdown unless a MamboSite page layout or hero deliberately generates it from the frontmatter title; never add a source heading that would duplicate the renderer-owned title. Give each page one primary subject. Use H2 and H3 in a logical hierarchy without skipping levels for visual size. The project `index.md` must state the boundary, link the source repository, expose child navigation, and distinguish current behavior from plans.
 
-MamboSite does not infer a useful landing page from a directory alone. Use explicit links or `::children{}` on every hub that owns child pages.
+MamboSite does not infer a useful landing page from a directory alone. A project hub that owns child pages must expose them through one or more card-rendering `::children` collections using the `list`, `grid`, or `cards` view. Use one collection for a small undivided documentation set. When distinct reader tasks justify sections, put a heading before each collection and select its members with `include` page references:
+
+```md
+## Start here
+
+::children{view="list" include=["Product","User Guide"] sort="order" direction="asc" show=["title","description"]}
+
+## Build and maintain
+
+::children{view="list" include=["Developer Guide"] sort="order" direction="asc" show=["title","description"]}
+```
+
+Across sectioned collections, include every routed child exactly once. Do not repeat a child between sections or leave a child reachable only by guessing its route. Reserve hand-authored Markdown documentation maps for repository READMEs, which GitHub must render without MamboSite, and for external or non-child destinations that a child collection cannot represent.
 
 ## Website documentation structure
 

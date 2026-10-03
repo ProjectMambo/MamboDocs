@@ -23,6 +23,8 @@ REQUIRED_SECTIONS = (
     "license",
 )
 
+CARD_CHILD_VIEWS = frozenset(("list", "grid", "cards"))
+
 
 def usage(stream=sys.stdout) -> None:
     print(
@@ -107,6 +109,39 @@ def frontmatter(content: str) -> dict[str, str] | None:
         if match:
             values[match.group(1)] = match.group(2).strip().strip('"\'')
     return values
+
+
+def has_card_children_collection(content: str) -> bool:
+    """Return whether rendered Markdown contains a visible child-card collection."""
+    visible = re.sub(r"<!--.*?-->", "", visible_markdown(content), flags=re.DOTALL)
+    for match in re.finditer(r"^ {0,3}::children\s*\{([^}]*)\}", visible, re.MULTILINE):
+        properties = match.group(1)
+        view = re.search(
+            r"\bview\s*=\s*([\"'])([^\"']+)\1",
+            properties,
+            re.IGNORECASE,
+        )
+        # MamboSite's default children view is the card-rendering list view.
+        value = "list" if view is None else view.group(2).strip().casefold()
+        if value in CARD_CHILD_VIEWS:
+            return True
+    return False
+
+
+def is_routed_child_markdown(path: Path, docs: Path) -> bool:
+    """Return whether a Markdown file represents a published child of docs/index.md."""
+    relative = path.relative_to(docs)
+    if relative == Path("index.md") or relative.name.casefold() in ("readme.md", "_info.md"):
+        return False
+    if any(part.startswith((".", "_")) for part in relative.parts):
+        return False
+    if any(part.casefold() == "archive" for part in relative.parts[:-1]):
+        return False
+    try:
+        metadata = frontmatter(path.read_text(encoding="utf-8"))
+    except UnicodeDecodeError:
+        return True
+    return metadata is None or metadata.get("status", "published").casefold() != "draft"
 
 
 def has_renderer_owned_h1(content: str) -> bool:
@@ -208,6 +243,17 @@ def inspect_repository(repository: Path) -> list[tuple[str, str]]:
     elif index is None:
         markdown_files = []
 
+    if (
+        index is not None
+        and any(is_routed_child_markdown(path, docs) for path in markdown_files)
+        and not has_card_children_collection(index)
+    ):
+        add(
+            "docs/index.md",
+            "routed child pages must be exposed by a visible ::children collection "
+            "using view list, grid, or cards",
+        )
+
     orders: dict[tuple[Path, int], list[Path]] = {}
     for path in markdown_files:
         relative = path.relative_to(repository)
@@ -305,6 +351,43 @@ def run_self_test() -> None:
         (repository / "docs" / "index.md").write_text(
             "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
             '::page{layout="home" width="wide"}\n',
+            encoding="utf-8",
+        )
+        assert inspect_repository(repository) == []
+
+        (repository / "docs" / "Guide.md").write_text(
+            "---\ntitle: Guide\ndescription: Complete a supported task.\norder: 10\n---\n\n"
+            "# Guide\n",
+            encoding="utf-8",
+        )
+        (repository / "docs" / "index.md").write_text(
+            "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
+            '::page{layout="home" width="wide"}\n\n'
+            "[Guide](Guide.md)\n",
+            encoding="utf-8",
+        )
+        findings = inspect_repository(repository)
+        assert any(
+            path == "docs/index.md" and "visible ::children" in message
+            for path, message in findings
+        )
+
+        (repository / "docs" / "index.md").write_text(
+            "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
+            '::page{layout="home" width="wide"}\n\n'
+            '::children{view="hidden"}\n',
+            encoding="utf-8",
+        )
+        findings = inspect_repository(repository)
+        assert any(
+            path == "docs/index.md" and "visible ::children" in message
+            for path, message in findings
+        )
+
+        (repository / "docs" / "index.md").write_text(
+            "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
+            '::page{layout="home" width="wide"}\n\n'
+            '::children{view="cards" include=["Guide"]}\n',
             encoding="utf-8",
         )
         assert inspect_repository(repository) == []

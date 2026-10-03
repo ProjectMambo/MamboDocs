@@ -14,15 +14,9 @@ Describe what the project does today, who it serves, and the boundary it owns.
 
 ::button{label="Source repository" href="https://github.com/ProjectMambo/PROJECT_NAME" variant="secondary" external=true}
 
-## Start here
-
-- [Product](Product.md) — motivation, users, scope, and outcomes.
-- [User guide](User%20Guide.md) — installation, tasks, configuration, recovery, and removal.
-- [Developer guide](Developer%20Guide.md) — setup, architecture, checks, and delivery.
-
 ## Documentation
 
-::children{view="list" sort="order" direction="asc" show=["title","description"]}
+::children{view="list" include=["Product","User Guide","Developer Guide"] sort="order" direction="asc" show=["title","description"]}
 
 ## Status
 
