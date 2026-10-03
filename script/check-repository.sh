@@ -109,6 +109,11 @@ def frontmatter(content: str) -> dict[str, str] | None:
     return values
 
 
+def has_renderer_owned_h1(content: str) -> bool:
+    """Return whether MamboSite owns the page's single rendered H1."""
+    return re.search(r"^::page\{", visible_markdown(content), re.MULTILINE) is not None
+
+
 def markdown_destinations(content: str) -> set[str]:
     visible = visible_markdown(content)
     destinations = {
@@ -213,17 +218,29 @@ def inspect_repository(repository: Path) -> list[tuple[str, str]]:
             continue
 
         page_h1 = headings(content, 1)
-        if len(page_h1) != 1:
+        metadata = None if path.name.casefold() == "readme.md" else frontmatter(content)
+        renderer_owns_h1 = (
+            not page_h1
+            and metadata not in (None, {})
+            and bool(metadata.get("title"))
+            and has_renderer_owned_h1(content)
+        )
+        if len(page_h1) != 1 and not renderer_owns_h1:
             add(relative, f"expected exactly one H1, found {len(page_h1)}")
 
         if path.name.casefold() != "readme.md":
-            metadata = frontmatter(content)
             if metadata is None:
                 add(relative, "missing YAML frontmatter")
             elif metadata == {}:
                 add(relative, "unclosed or empty YAML frontmatter")
             else:
                 for field in ("title", "description", "order"):
+                    if (
+                        field == "order"
+                        and relative == Path("docs/index.md")
+                        and has_renderer_owned_h1(content)
+                    ):
+                        continue
                     if not metadata.get(field):
                         add(relative, f"missing frontmatter field: {field}")
                 if metadata.get("order"):
@@ -286,8 +303,8 @@ def run_self_test() -> None:
             encoding="utf-8",
         )
         (repository / "docs" / "index.md").write_text(
-            "---\ntitle: Example\ndescription: Example documentation.\norder: 10\n---\n\n"
-            "# Example\n",
+            "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
+            '::page{layout="home" width="wide"}\n',
             encoding="utf-8",
         )
         assert inspect_repository(repository) == []
@@ -297,6 +314,17 @@ def run_self_test() -> None:
         findings = inspect_repository(repository)
         assert any("broken local link" in message for _, message in findings)
         assert any("empty Markdown link" in message for _, message in findings)
+
+        (repository / "docs" / "generated.md").write_text(
+            "---\ntitle: Generated heading\ndescription: Renderer-owned title.\norder: 20\n---\n\n"
+            '::page{layout="article" width="normal"}\n',
+            encoding="utf-8",
+        )
+        findings = inspect_repository(repository)
+        assert not any(
+            path == "docs/generated.md" and "H1" in message
+            for path, message in findings
+        )
     print("check-repository self-test passed")
 
 

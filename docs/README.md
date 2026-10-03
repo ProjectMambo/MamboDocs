@@ -82,11 +82,22 @@ LICENSE                    MIT licence
 
 ## Validation
 
-From `notes/`, synchronize the canonical source, then validate the exported repository:
+From `notes/`, synchronize the canonical source:
 
 ```bash
 node Scripts/sync_docs.js --sync MamboDocs
-../MamboDocs/script/check-repository.sh --strict ../MamboDocs
+```
+
+Then run the complete gate from `MamboDocs/`:
+
+```bash
+sh -n script/check-repository.sh
+./script/check-repository.sh --self-test
+(
+  cd codex/plugins/mambo-workflow/hooks
+  PYTHONDONTWRITEBYTECODE=1 python3 -m unittest test_post_edit.py
+)
+./script/check-repository.sh --strict .
 git diff --check
 ```
 
