@@ -43,6 +43,15 @@ FIRST_SUCCESSFUL_COMMAND
 
 Expected result: DESCRIBE_SUCCESS.
 
+<!-- Required when the project has a direct package, tool, service, or sibling-repository dependency. Delete this section only when the project is genuinely dependency-free. -->
+## Dependencies
+
+| Dependency | Classification | Purpose | Provider, version pin, or source | Scope | Update path |
+|---|---|---|---|---|---|
+| DEPENDENCY_NAME | Package, tool, service, sibling repository, or platform | CAPABILITY_PROVIDED | PROVIDER_VERSION_PIN_OR_SOURCE | Runtime, build/test, optional integration, or maintainer | MANIFEST_ADAPTER_OR_CHECK |
+
+Link large package inventories to their authoritative manifests and lockfiles. Call out every direct dependency that users install, operators authorize, or maintainers coordinate across repositories; do not copy transitive package lists into the README.
+
 ## Usage
 
 Document the stable primary task. Link detailed tasks to the user guide. Rename this section to **API** for a library or service when that is clearer.

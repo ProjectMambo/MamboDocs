@@ -63,6 +63,19 @@ The check is advisory by default, which is appropriate during an implementation 
 /path/to/MamboDocs/script/check-repository.sh --strict /path/to/repository
 ```
 
+## Dependencies
+
+Reading and applying the MamboDocs standard requires only the Markdown files. Repository maintenance uses these direct tools:
+
+| Dependency | Classification | Purpose | Provider, version pin, or source | Scope | Update path |
+|---|---|---|---|---|---|
+| POSIX `sh` | Tool | Launch the repository checker | System-provided POSIX shell; no repository pin | Build/test | Update `script/check-repository.sh` and run its self-test |
+| Python 3 | Tool | Run the checker implementation and Codex hook tests | System-provided `python3`; no third-party packages or repository pin | Build/test | Update the scripts and their embedded or adjacent self-tests together |
+| Project Mambo notes workspace | Sibling workspace | Own the canonical documentation and synchronization command | `notes/Docs/Projects/MamboDocs/` and `notes/Scripts/sync_docs.js` | Maintainer | Edit the canonical notes, synchronize MamboDocs and MamboWiki, and review both diffs |
+| Node.js | Tool | Run the notes workspace exporter | The `node` runtime supported by the Project Mambo notes workspace; no MamboDocs package pin | Maintainer | Update the notes workspace runtime requirement, then rerun synchronization and validation |
+
+MamboDocs has no runtime package, external service, or sibling-checkout requirement for readers. The detailed dependency policy is in [Dependencies](Dependencies.md).
+
 ## Documentation
 
 The standard is organized as a lifecycle: define the product, create the repository, write user and developer documentation, design public boundaries, manage versions and dependencies, then validate and deliver. The [published MamboDocs hub](https://projectmambo.org/mambodocs/) and the [local documentation hub](index.md) contain the complete standard.

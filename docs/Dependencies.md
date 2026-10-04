@@ -26,9 +26,31 @@ Do not add a dependency for one trivial helper, speculative future use, or a dev
 
 ## Classify dependencies
 
-Keep runtime, build, development, optional, peer, and platform dependencies in the ecosystem's appropriate categories. A dependency needed only to regenerate a committed artifact is a maintainer-time dependency, not automatically a requirement for every user or production build.
+Describe a dependency along two separate dimensions. Its classification says what it is—a package, command-line tool, external service, sibling repository, or platform dependency. Its scope says when it is needed—at runtime, during build and test, for an optional integration, or only by maintainers.
+
+Keep runtime, build, development, optional, peer, and platform dependencies in the ecosystem's appropriate manifest categories. A dependency needed only to regenerate a committed artifact is a maintainer-time dependency, not automatically a requirement for every user or production build.
 
 Document external system dependencies—databases, services, fonts, operating-system packages, commands, sibling repositories—with the same care as package-manager entries.
+
+## README declaration
+
+A project with a direct package, command-line tool, external service, or sibling-repository dependency must include a `## Dependencies` section in its README. Omit the section only when the project is genuinely dependency-free; prerequisites scattered through setup instructions are not a substitute for one dependency declaration.
+
+For each direct dependency, declare:
+
+- its name and classification;
+- the capability or workflow it provides;
+- its provider or authoritative source, plus the supported version, exact pin, or checksum when versioned;
+- whether ordinary runtime, build and test, optional integration, or maintainer-only work needs it;
+- the update path, including the manifest, lockfile, adapter, regeneration command, or integration check that must move with it.
+
+Use the ecosystem manifest and lockfile as the authoritative package inventory. A large project may link those files instead of copying every routine package into prose, but the README must call out direct dependencies that users install, operators authorize, or maintainers coordinate across repositories. Do not list transitive packages as if the project selected them directly.
+
+A compact declaration may use this shape:
+
+| Dependency | Classification | Purpose | Provider, version pin, or source | Scope | Update path |
+|---|---|---|---|---|---|
+| `DEPENDENCY_NAME` | Package, tool, service, sibling repository, or platform | `CAPABILITY` | `PROVIDER_VERSION_PIN_OR_SOURCE` | Runtime, build/test, optional integration, or maintainer | `MANIFEST_ADAPTER_OR_CHECK` |
 
 ## Pinning and locks
 

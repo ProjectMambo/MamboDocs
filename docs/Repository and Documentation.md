@@ -37,12 +37,13 @@ Every Project Mambo README uses one H1 followed by a one- or two-sentence curren
 2. **Status** — maturity, supported platforms, current limitations, and ownership route.
 3. **User stories** — representative supported outcomes, or a link to the product definition.
 4. **Getting started** — the shortest successful path from a named starting state.
-5. **Usage** or **API** — the stable user or consumer surface when applicable.
-6. **Documentation** — links to the project hub, user guide, developer guide, and published Wiki route.
-7. **Project structure** — a compact map of meaningful top-level paths.
-8. **Validation** — the authoritative local checks in execution order.
-9. **Development** — contribution workflow, canonical docs source, and delivery notes.
-10. **License** — licence name and exact local link.
+5. **Dependencies** — direct packages, tools, services, and sibling repositories, including their classification, purpose, provider and version pin or source, runtime/build/maintainer scope, and update path. Include this section whenever such a dependency exists; omit it only when the project is genuinely dependency-free.
+6. **Usage** or **API** — the stable user or consumer surface when applicable.
+7. **Documentation** — links to the project hub, user guide, developer guide, and published Wiki route.
+8. **Project structure** — a compact map of meaningful top-level paths.
+9. **Validation** — the authoritative local checks in execution order.
+10. **Development** — contribution workflow, canonical docs source, and delivery notes.
+11. **License** — licence name and exact local link.
 
 Additional sections are welcome when they answer a real reader question. Keep planned work out of current capability lists. A README is an entry point, not the complete manual: move multi-step operation, architecture, exhaustive reference, and troubleshooting into `docs/` and link them.
 
