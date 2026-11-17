@@ -8,7 +8,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/ProjectMambo/MamboDocs?style=flat-square&color=orange" alt="MIT License" /></a>
 </p>
 
-MamboDocs is the shared repository and documentation standard for Project Mambo. It defines how a Mambo project explains its purpose, starts from a clean clone, exposes commands and APIs, manages versions and dependencies, publishes documentation, and proves that a change is ready to deliver.
+MamboDocs is the shared repository and documentation standard for Project Mambo. It defines how a Mambo project explains its purpose, starts from a clean clone, exposes commands, APIs, and AI tools, manages versions and dependencies, publishes documentation, and proves that a change is ready to deliver.
 
 ## Motivation
 
@@ -28,6 +28,7 @@ MamboDocs is documentation-only and is not independently versioned. Its synchron
 - As a contributor, I can prepare a fresh clone, understand the architecture, run the authoritative checks, and submit one reviewable change.
 - As a maintainer, I can tell which files are authoritative, generated, public, versioned, and safe to replace.
 - As a Project Mambo tool, I can rely on a small set of repository and documentation conventions without guessing project internals.
+- As an AI client, I can use an application's supported domain actions through typed tools without controlling its user interface or shell.
 
 ## Start here
 
@@ -39,7 +40,7 @@ MamboDocs is documentation-only and is not independently versioned. Its synchron
 | Write task-focused help for users | [User guide](docs/User%20Guide.md) |
 | Explain setup, architecture, and contribution work | [Developer guide](docs/Developer%20Guide.md) |
 | Format commands and build safe repository scripts | [Commands and scripts](docs/Commands%20and%20Scripts.md) |
-| Design a CLI, library, HTTP, file, or UI contract | [Interfaces](docs/Interfaces.md) |
+| Design an AI-tool, CLI, library, HTTP, file, or UI contract | [Interfaces](docs/Interfaces.md) |
 | Manage installation, versions, releases, and retirement | [Lifecycle and versioning](docs/Lifecycle.md) |
 | Consume another project reproducibly | [Dependencies](docs/Dependencies.md) |
 | Validate, commit, push, release, or deploy work | [Validation and delivery](docs/Validation%20and%20Delivery.md) |

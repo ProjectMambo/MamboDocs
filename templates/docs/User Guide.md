@@ -37,6 +37,11 @@ Expected result: DESCRIBE_SUCCESS.
 
 State prerequisites, ordered steps, success result, common failures, and safe recovery.
 
+<!-- Keep for applications with domain queries or mutations. -->
+## AI tool access
+
+Explain how to connect an MCP or other supported AI client, which data its tools can read, which actions can write, how authorization and confirmation work, and how to disconnect or revoke access. Link the tool reference rather than copying every schema here.
+
 ## Configuration and data
 
 Document configuration sources and precedence, defaults, credentials, logs, caches, and durable user-data locations.

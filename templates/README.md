@@ -26,6 +26,7 @@ Describe the user problem, why it matters, and why this repository is the right 
 | Maturity | Experimental, Active, Stable, Maintenance, or Archived |
 | Platforms | SUPPORTED_PLATFORMS |
 | Primary surface | CLI, TUI, library, website, service, asset, configuration, or documentation |
+| AI tool interface | MCP, documented typed alternative, or not applicable because there are no application domain actions |
 | Limitations | CURRENT_LIMITATIONS |
 
 ## User stories

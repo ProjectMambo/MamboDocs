@@ -33,7 +33,7 @@ Give the repository a one-sentence GitHub description that says what it does, no
 
 | Type | Typical public boundary | Lifecycle |
 |---|---|---|
-| Application | command, TUI, GUI, or service | install/update/remove or deploy |
+| Application | primary product surface plus an AI tool interface for domain actions | install/update/remove or deploy |
 | Command-line tool | `mb...` command | install/update/remove and SemVer releases |
 | Library | package or crate exports | SemVer package releases |
 | Website | routes and deployed pages | local build and commit deployment |
@@ -42,6 +42,8 @@ Give the repository a one-sentence GitHub description that says what it does, no
 | Documentation | Markdown and published routes | synchronize and deploy; usually unversioned |
 
 A repository may have more than one real boundary, but it should still have one primary type and one obvious starting path.
+
+For an application, add its AI tool interface with the first real domain action and route both through the same core. Do not create an empty MCP server, placeholder tools, or a duplicate CLI before a working action exists.
 
 ## Create the baseline
 

@@ -1,5 +1,5 @@
 ---
-description: Design stable command-line, terminal UI, library, service, file, and configuration boundaries.
+description: Design stable AI-tool, command-line, terminal UI, library, service, file, and configuration boundaries.
 title: Interfaces and API design
 order: 70
 ---
@@ -65,11 +65,15 @@ A TUI is not a private wrapper around a library; its navigation, key bindings, s
 
 Ratatui applications use applicable shared MamboUI components, but keep domain behavior and project-specific workflows in the consuming application.
 
-## Application interface parity
+## Application and AI tool parity
 
-An application with an interactive interface must also expose every supported state-changing and query domain action through a non-interactive CLI. Presentation-only actions such as navigation, focus, theme selection, and help do not need command equivalents.
+Every Project Mambo application with supported domain queries or mutations exposes those actions as typed AI tools, normally through a Model Context Protocol (MCP) server. Presentation-only actions such as navigation, focus, theme selection, and help do not need tool equivalents. Libraries, assets, documentation, and static presentation surfaces with no application domain actions do not need an MCP server.
 
-The UI and CLI must call the same application or core operation so validation, authorization, persistence, and error semantics cannot drift. The CLI provides machine-readable results and stable error codes for automation. Tool and MCP adapters reuse that boundary and must not bypass validation, authorization, exact-target checks, preview or confirmation requirements, or atomic mutation rules.
+The interactive interface and AI tools call the same application or core operation so validation, authorization, persistence, and error semantics cannot drift. A CLI may reuse that core for scripts or human operators, but it is optional and is not the AI integration boundary.
+
+Each AI tool has an action-oriented name and description, explicit input and output schemas, stable structured errors, and an accurate read or write annotation. Read tools return only the data needed for the task. Write tools preserve application authorization and exact-target checks, require confirmation for consequential actions, and use preview, idempotency, or atomic mutation where the domain requires them.
+
+MCP is the default portable tool protocol. When a target platform cannot use MCP, document the typed alternative and keep the domain contract transport-neutral. Do not expose generic shell execution, raw SQL, unrestricted filesystem access, or another escape hatch in place of focused tools.
 
 ## Library APIs
 

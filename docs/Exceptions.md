@@ -17,7 +17,8 @@ Consistency means applying the same rule to the same kind of boundary. It does n
 | Documentation | README, project hub, canonical sync, link/content checks | installer, package API, SemVer release |
 | Website | user-facing routes, content structure, accessibility, production build, deploy and rollback path | local uninstall, package release when not consumed as a package |
 | Library | public API, examples, compatibility policy, tests, package release | end-user installer or TUI guide |
-| CLI or application | install, quick start, commands/UI, config/data, recovery, update/remove, versions | HTTP API when none exists |
+| Application | install, quick start, UI or service, AI tools for domain actions, config/data, recovery, update/remove, versions | duplicate CLI verbs when the AI tool interface covers automation; HTTP API when none exists |
+| Command-line tool | install, quick start, commands, AI tools for domain actions, config/data, recovery, update/remove, versions | GUI or TUI when the CLI is sufficient; HTTP API when none exists |
 | Asset or generator | asset licence, source, deterministic generation, format compatibility | runtime service operations |
 | Personal configuration | assumptions, preview, conflict handling, apply/unapply, owned paths | general-purpose portability or public package release |
 | Experimental prototype | honest status, safe boundary, reproducible demo, limitations | stable compatibility promise or premature release automation |
@@ -64,6 +65,7 @@ These choices normally need no exception record when documented accurately:
 - a website treats deployment as its delivery lifecycle and publishes no package;
 - a tiny repository keeps user and developer guidance in the README until either audience needs a separate page;
 - a single-purpose generator omits CLI verbs because its argument grammar is already clear;
+- an application exposes domain actions through MCP without duplicating them as CLI verbs;
 - committed generated assets keep ordinary builds independent from maintainer tooling;
 - an experimental application documents a demo data source and postpones installation or release until a durable path exists.
 
@@ -88,7 +90,7 @@ MamboDocs does not require:
 - a shared abstraction for every cross-repository call;
 - CI that performs no meaningful remote check;
 - releases for unversioned docs, sites, or personal configuration;
-- speculative APIs, plugin systems, or extension points;
+- speculative APIs, plugin systems, or extension points beyond the required application tool boundary;
 - duplicating generated reference material by hand;
 - rewriting a working public grammar solely for visual uniformity.
 

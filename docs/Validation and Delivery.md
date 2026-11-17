@@ -73,7 +73,7 @@ Add the gates that match the real surface:
 | TypeScript or Next.js | format/lint, typecheck, content checks, tests, and production build as applicable |
 | CLI | help/version smoke tests, invalid input, stdout/stderr, and exit statuses |
 | TUI | state-transition tests plus terminal-size and primary-flow smoke checks |
-| UI and CLI application | a parity contract check for shared domain actions, validation, structured results, and errors |
+| Application UI and AI tools | parity checks for domain actions, schemas, read/write classification, authorization, confirmation, structured errors, and denial/failure paths |
 | HTTP service | contract, authorization, validation, failure, migration, and health checks |
 | Generated assets | regenerate from pinned inputs and compare reviewed output |
 | Documentation | repository checker, sync self-test, link/content validation, and site build |

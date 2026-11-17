@@ -34,6 +34,8 @@ State expected results and any filesystem, network, container, service, or crede
 
 Describe components, dependency direction, data flow, persistence, integrations, and trust boundaries.
 
+For an application, show the interactive interface and MCP or other AI-tool adapter calling the same application core. Name the transport, authentication and authorization boundary, least-data policy, read/write tool classification, and any optional CLI without putting domain rules in an adapter.
+
 ## Local workflow
 
 | Task | Command |
@@ -51,6 +53,8 @@ For each generated path, name the authoritative source, update command, review e
 ## Testing and validation
 
 Give the authoritative command order, expected external checks, and limitations.
+
+For an AI tool interface, include schema and UI-parity checks, read/write annotations, authorization and confirmation behavior, structured errors, and denial/failure paths.
 
 ## Public changes and versions
 
