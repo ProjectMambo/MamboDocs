@@ -63,7 +63,13 @@ A TUI is not a private wrapper around a library; its navigation, key bindings, s
 - make long operations cancellable or visibly in progress;
 - test state transitions independently from terminal rendering where practical.
 
-Use shared MamboUI components when they exist, but keep domain behavior and project-specific workflows in the consuming application.
+Ratatui applications use applicable shared MamboUI components, but keep domain behavior and project-specific workflows in the consuming application.
+
+## Application interface parity
+
+An application with an interactive interface must also expose every supported state-changing and query domain action through a non-interactive CLI. Presentation-only actions such as navigation, focus, theme selection, and help do not need command equivalents.
+
+The UI and CLI must call the same application or core operation so validation, authorization, persistence, and error semantics cannot drift. The CLI provides machine-readable results and stable error codes for automation. Tool and MCP adapters reuse that boundary and must not bypass validation, authorization, exact-target checks, preview or confirmation requirements, or atomic mutation rules.
 
 ## Library APIs
 
