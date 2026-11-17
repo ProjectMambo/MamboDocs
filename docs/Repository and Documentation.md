@@ -39,7 +39,7 @@ Every Project Mambo README uses one H1 followed by a one- or two-sentence curren
 4. **Getting started** — the shortest successful path from a named starting state.
 5. **Dependencies** — direct packages, tools, services, and sibling repositories, including their classification, purpose, provider and version pin or source, runtime/build/maintainer scope, and update path. Include this section whenever such a dependency exists; omit it only when the project is genuinely dependency-free.
 6. **Usage** or **API** — the stable user or consumer surface when applicable.
-7. **Documentation** — links to the project hub, user guide, developer guide, and published Wiki route.
+7. **Documentation** — links to the project hub, development plan, user guide, developer guide, and published Wiki route.
 8. **Project structure** — a compact map of meaningful top-level paths.
 9. **Validation** — the authoritative local checks in execution order.
 10. **Development** — contribution workflow, canonical docs source, and delivery notes.
@@ -78,6 +78,7 @@ Every repository has a canonical `README.md` and `index.md`. Add these pages whe
 README.md               repository entry point
 index.md                published project hub and child navigation
 Product.md              motivation, users, stories, scope, and outcomes
+Development Plan.md     current state, dependency-ordered stages, exit gates, risks, and milestones
 User Guide.md           installation, tasks, configuration, recovery, removal
 Developer Guide.md      setup, architecture, workflows, checks, contribution
 API.md                  public API reference or links to generated reference
@@ -87,6 +88,8 @@ Decisions/              important architecture decision records
 ```
 
 Use fewer pages for a small project, but keep user instructions separate from contributor internals once combining them makes either audience scan around irrelevant detail. Reference pages describe facts; guides lead to outcomes; explanations provide context; tutorials teach through a complete path.
+
+Development Plan.md is required for every repository. Keep its detail proportional, but do not replace it with an issue list or a vague roadmap. Follow [Development planning](Development%20Planning.md) for the required content and maintenance contract.
 
 ## Canonical source and synchronization
 

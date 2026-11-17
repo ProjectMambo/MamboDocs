@@ -53,6 +53,7 @@ Start on `main`, configure the existing remote, and add only applicable files:
 README.md              required repository entry point
 LICENSE                required licence text
 docs/index.md          required published project hub
+docs/Development Plan.md required dependency-ordered implementation or maintenance plan
 docs/User Guide.md     user-facing tasks when the project has end users
 docs/Developer Guide.md contributor setup and architecture for code projects
 script/                repository-owned automation when commands are needed
@@ -72,11 +73,12 @@ Create the canonical source under:
 ```text
 notes/Docs/Projects/<Repository>/README.md
 notes/Docs/Projects/<Repository>/index.md
+notes/Docs/Projects/<Repository>/Development Plan.md
 notes/Docs/Projects/<Repository>/User Guide.md
 notes/Docs/Projects/<Repository>/Developer Guide.md
 ```
 
-Add only the detailed pages the project needs. Register the repository with the notes synchronization script before treating repository copies as generated. Author in notes, update the page's `updated` value, synchronize, and review the complete output.
+The Development Plan page is required; add other detailed pages only when the project needs them. Register the repository with the notes synchronization script before treating repository copies as generated. Author in notes, update the page's `updated` value, synchronize, and review the complete output.
 
 The initial README must include shield badges, motivation, status, getting started, documentation, project structure, validation, development, and licence sections. Add current user stories or link the product definition.
 
@@ -109,9 +111,9 @@ Use the ecosystem's existing task runner or package scripts before introducing a
 
 Open a focused branch for each coherent increment. A practical sequence is:
 
-1. product definition and documentation baseline;
-2. smallest end-to-end user path;
-3. validation and failure behavior;
+1. product definition, detailed development plan, and documentation baseline;
+2. smallest end-to-end user path identified by the plan;
+3. validation and failure behavior required by the stage gate;
 4. installation, release, or deployment only when the user path works.
 
 Use Conventional Commits, keep generated output with the source that produced it, and merge only after the branch's acceptance criteria and documented checks pass. Do not publish a package, installer, or stable compatibility promise for a placeholder implementation.
@@ -121,6 +123,7 @@ Use Conventional Commits, keep generated output with the source that produced it
 A new repository is ready for ordinary development when:
 
 - its purpose, users, status, scope, and non-goals are explicit;
+- its development plan identifies dependency order, stage reach, exit gates, risks, and the complete acceptance journey;
 - README badges and links are valid;
 - the canonical docs source synchronizes cleanly;
 - a fresh-clone setup path is documented and tested;

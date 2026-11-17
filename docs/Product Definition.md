@@ -85,8 +85,8 @@ Use one current maturity label in the README:
 
 Name the owning Project Mambo team or maintainer route without publishing private contact details. State how users report bugs and, where relevant, security issues.
 
-## Decisions and roadmap
+## Decisions and development plan
 
-Keep the README focused on current behavior. Track planned work in issues or a short roadmap with no implied delivery date. Record decisions that are difficult to reverse, affect more than one repository, or change a public contract in a small architecture decision record containing context, decision, consequences, and status.
+Keep the README focused on current behavior. Maintain the required [Development plan](Development%20Planning.md) as the dependency and acceptance map, and keep task-level churn in issues or branches. The plan uses stages and exit gates rather than implied delivery dates. Record decisions that are difficult to reverse, affect more than one repository, or change a public contract in a small architecture decision record containing context, decision, consequences, and status.
 
 Delete obsolete plans and superseded decisions or mark them clearly. Historical text must never obscure the current supported path.

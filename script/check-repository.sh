@@ -204,6 +204,21 @@ def inspect_repository(repository: Path) -> list[tuple[str, str]]:
     readme = read("README.md")
     read("LICENSE")
     index = read("docs/index.md")
+    plan_candidates = (
+        Path("docs/Development Plan.md"),
+        Path("docs/_mounts") / repository.name.casefold() / "Development Plan.md",
+    )
+    plan = next(
+        (relative for relative in plan_candidates if (repository / relative).is_file()),
+        None,
+    )
+    if plan is None:
+        add("docs/Development Plan.md", "missing required file or canonical self-mount plan")
+    else:
+        try:
+            (repository / plan).read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            add(plan, "must be UTF-8 text")
 
     if readme is not None:
         h1 = headings(readme, 1)
@@ -348,12 +363,33 @@ def run_self_test() -> None:
             f"{sections}\n[Docs](docs/index.md) [License](LICENSE)\n",
             encoding="utf-8",
         )
+        development_plan = (
+            "---\ntitle: Development plan\n"
+            "description: Dependency-ordered delivery stages.\n"
+            "order: 5\n---\n\n# Development plan\n"
+        )
+        (repository / "docs" / "Development Plan.md").write_text(
+            development_plan,
+            encoding="utf-8",
+        )
         (repository / "docs" / "index.md").write_text(
             "---\ntitle: Example\ndescription: Example documentation.\n---\n\n"
-            '::page{layout="home" width="wide"}\n',
+            '::page{layout="home" width="wide"}\n\n'
+            '::children{view="list" include=["Development Plan"]}\n',
             encoding="utf-8",
         )
         assert inspect_repository(repository) == []
+
+        (repository / "docs" / "Development Plan.md").unlink()
+        findings = inspect_repository(repository)
+        assert any(
+            path == "docs/Development Plan.md" and "missing required file" in message
+            for path, message in findings
+        )
+        (repository / "docs" / "Development Plan.md").write_text(
+            development_plan,
+            encoding="utf-8",
+        )
 
         (repository / "docs" / "Guide.md").write_text(
             "---\ntitle: Guide\ndescription: Complete a supported task.\norder: 10\n---\n\n"

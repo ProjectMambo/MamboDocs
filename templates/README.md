@@ -66,6 +66,7 @@ SUPPORTED_COMMAND --long-option VALUE
 | Goal | Document |
 |---|---|
 | Understand the project boundary | [Project hub](docs/index.md) |
+| Follow the dependency-ordered delivery plan | [Development plan](docs/Development%20Plan.md) |
 | Install and use the project | [User guide](docs/User%20Guide.md) |
 | Develop and validate changes | [Developer guide](docs/Developer%20Guide.md) |
 | Browse published documentation | [projectmambo.org/PROJECT_SLUG/](https://projectmambo.org/PROJECT_SLUG/) |
