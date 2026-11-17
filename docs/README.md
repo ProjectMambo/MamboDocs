@@ -36,6 +36,7 @@ MamboDocs is documentation-only and is not independently versioned. Its synchron
 |---|---|
 | Define motivation, users, scope, and outcomes | [Product definition](Product%20Definition.md) |
 | Start a new Project Mambo repository | [Starting a repository](Starting%20a%20Repository.md) |
+| Write a dependency-ordered repository plan | [Development planning](Development%20Planning.md) |
 | Structure a repository, README, and website docs | [Repository and documentation](Repository%20and%20Documentation.md) |
 | Write task-focused help for users | [User guide](User%20Guide.md) |
 | Explain setup, architecture, and contribution work | [Developer guide](Developer%20Guide.md) |
@@ -46,6 +47,7 @@ MamboDocs is documentation-only and is not independently versioned. Its synchron
 | Validate, commit, push, release, or deploy work | [Validation and delivery](Validation%20and%20Delivery.md) |
 | Apply the workflow automatically in Codex | [Codex workflow](Codex%20Workflow.md) |
 | Record a justified exception | [Exceptions](Exceptions.md) |
+| Follow MamboDocs maintenance stages | [Development plan](Development%20Plan.md) |
 | Browse the published standard | [projectmambo.org/mambodocs/](https://projectmambo.org/mambodocs/) |
 
 ## Getting started
@@ -79,7 +81,7 @@ MamboDocs has no runtime package, external service, or sibling-checkout requirem
 
 ## Documentation
 
-The standard is organized as a lifecycle: define the product, create the repository, write user and developer documentation, design public boundaries, manage versions and dependencies, then validate and deliver. The [published MamboDocs hub](https://projectmambo.org/mambodocs/) and the [local documentation hub](index.md) contain the complete standard.
+The standard is organized as a lifecycle: define the product, write its dependency-ordered development plan, create the repository, document users and contributors, design public boundaries, manage versions and dependencies, then validate and deliver. The [published MamboDocs hub](https://projectmambo.org/mambodocs/) and the [local documentation hub](index.md) contain the complete standard.
 
 Project documentation is authored once under `notes/Docs/Projects/<Repository>/` and synchronized into the repository. Repository `README.md` and `docs/` are generated snapshots; edit the canonical notes source first, update its `updated` field, then run the sync command documented in [Validation and delivery](Validation%20and%20Delivery.md).
 

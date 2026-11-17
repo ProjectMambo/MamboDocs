@@ -61,6 +61,7 @@ If the project cannot meet one of these, the affected capability remains unsuppo
 These choices normally need no exception record when documented accurately:
 
 - a docs-only repository uses Git history instead of SemVer;
+- a stable, maintenance-only, or archived repository keeps a concise compatibility, dependency, security, and retirement plan instead of inventing feature stages;
 - `npm ci` or `cargo build --locked` is the bootstrap command without a wrapper;
 - a website treats deployment as its delivery lifecycle and publishes no package;
 - a tiny repository keeps user and developer guidance in the README until either audience needs a separate page;

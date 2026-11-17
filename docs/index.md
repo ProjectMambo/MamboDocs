@@ -19,6 +19,7 @@ For a new project, begin with the product definition and new-repository checklis
 ## Core contract
 
 - Define motivation, users, current scope, non-goals, and maturity before architecture.
+- Maintain a detailed, dependency-ordered development plan with stage exit gates.
 - Author documentation once in the notes vault and synchronize complete repository snapshots.
 - Make the README, user path, developer setup, public interfaces, lifecycle, and validation route discoverable.
 - Keep commands and scripts copyable, deterministic where practical, and safe around user-owned state.
@@ -29,7 +30,7 @@ For a new project, begin with the product definition and new-repository checklis
 
 ## Define and document a project
 
-::children{include=["[[Product Definition]]","[[Starting a Repository]]","[[Repository and Documentation]]","[[User Guide]]","[[Developer Guide]]"] view="list" sort="order" direction="asc" show=["title","description"]}
+::children{include=["[[Product Definition]]","[[Starting a Repository]]","[[Development Planning]]","[[Repository and Documentation]]","[[User Guide]]","[[Developer Guide]]"] view="list" sort="order" direction="asc" show=["title","description"]}
 
 ## Design and maintain contracts
 
@@ -38,6 +39,10 @@ For a new project, begin with the product definition and new-repository checklis
 ## Validate and govern delivery
 
 ::children{include=["[[Validation and Delivery]]","[[Codex Workflow]]","[[Exceptions]]"] view="list" sort="order" direction="asc" show=["title","description"]}
+
+## Maintain MamboDocs
+
+::children{include=["[[Development Plan]]"] view="list" sort="order" direction="asc" show=["title","description"]}
 
 ## Source of truth
 

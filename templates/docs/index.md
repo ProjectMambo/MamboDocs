@@ -16,7 +16,7 @@ Describe what the project does today, who it serves, and the boundary it owns.
 
 ## Documentation
 
-::children{view="list" include=["Product","User Guide","Developer Guide"] sort="order" direction="asc" show=["title","description"]}
+::children{view="list" include=["Product","Development Plan","User Guide","Developer Guide"] sort="order" direction="asc" show=["title","description"]}
 
 ## Status
 
